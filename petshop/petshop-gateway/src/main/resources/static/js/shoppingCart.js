@@ -1,0 +1,148 @@
+let shoppingCartApp = new Vue({
+    el:'#shoppingCartApp',
+    data:{
+        products:[],
+        total:0
+    },
+    methods:{
+        //加載該用戶購物車內商品
+        loadShoppingList:function(){
+            $.ajax({
+                url:'/product/v1/userCart/select',
+                method:'GET',
+                success:function(r){
+                    if(r.code===OK){
+                        console.log(r.data);
+                        shoppingCartApp.products = r.data;
+                        shoppingCartApp.totalPrice();
+                    }
+                }
+            });
+        },
+        //刪除購物車中某商品
+        deleteProduct:function(id){
+            $.ajax({
+                url: '/product/v1/userCart/delete/'+id,
+                method: 'GET',
+                success:function(r){
+                    if(r.code===OK){
+                        //刪除成功後遍歷products
+                        shoppingCartApp.products.forEach(function(product,index){
+                            if(id===product.id){
+                                shoppingCartApp.products.splice(index,1);
+                            }
+                        })
+                    }
+                    shoppingCartApp.totalPrice();
+                }
+            });
+        },
+        //商品數量+1
+        addOneProduct:function(id,count){
+            if(!id){
+                console.log('商品id為空');
+                return;
+            }
+            if(!count){
+                console.log('商品數量為空');
+                return;
+            }
+            count = count+1;
+            $.ajax({
+                url:'/product/v1/userCart/updatecount',
+                method:'GET',
+                data:{
+                    id:id,
+                    count:count
+                },
+                success:function(r){
+                    if(r.code===OK){
+                        console.log('+1成功');
+                        shoppingCartApp.totalPrice();
+                        shoppingCartApp.loadShoppingList();
+                    }
+                }
+            });
+        },
+        //商品數量-1
+        deleteOneProduct:function(id,count){
+            if(!id){
+                console.log('商品id為空');
+                return;
+            }
+            if(!count || count<=1){
+                console.log('商品數量為空');
+                return;
+            }
+            count = count-1;
+            $.ajax({
+                url:'/product/v1/userCart/updatecount',
+                method:'GET',
+                data:{
+                    id:id,
+                    count:count
+                },
+                success:function(r){
+                    if(r.code===OK){
+                        console.log('-1成功');
+                        shoppingCartApp.totalPrice();
+                        shoppingCartApp.loadShoppingList();
+                    }
+                }
+            });
+        },
+        //商品輸入框失焦時執行
+        blur:function(id,count){
+            if(!id){
+                return;
+            }
+            if(!count){
+                return;
+            }
+            console.log('productId:'+id);
+            console.log('count:'+count);
+            $.ajax({
+                url:'/product/v1/userCart/updatecount',
+                method:'GET',
+                data:{
+                    id:id,
+                    count:count
+                },
+                success:function(r){
+                    if(r.code===OK){
+                        console.log('商品數量修改成功');
+                        shoppingCartApp.totalPrice();
+                        shoppingCartApp.loadShoppingList();
+                    }
+                }
+            });
+        },
+        //計算總價
+        totalPrice:function(){
+            var total = 0;
+            var i = 0;
+            shoppingCartApp.products.forEach(function(product,index){
+                var temPrice = product.price == null ? product.oprice : product.price;
+                total += temPrice*product.count;
+                Vue.set(product,'onePrice',temPrice*product.count);
+            })
+            shoppingCartApp.total = total;
+        },
+        //刪除所有商品
+        deleteAll:function(){
+            $.ajax({
+                url:'/product/v1/userCart/deleteall',
+                method:'GET',
+                success:function(r){
+                    if(r.code===OK){
+                        shoppingCartApp.products = [];
+                    }
+                    shoppingCartApp.totalPrice();
+                }
+            });
+        }
+    },
+    created:function(){
+        this.loadShoppingList();
+    }
+});

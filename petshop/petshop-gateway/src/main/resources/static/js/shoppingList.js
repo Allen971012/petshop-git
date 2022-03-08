@@ -1,0 +1,139 @@
+
+let shoppingListApp = new Vue({
+    el:'#shoppingListApp',
+    data:{
+        products:[],
+        total:0
+    },
+    methods:{
+        //加載該用戶購物車內商品 並顯示
+        loadShoppingList:function(){
+            $.ajax({
+                url:'/product/v1/userCart/select',
+                method:'GET',
+                success:function(r){
+                    if(r.code===OK){
+                        console.log("顯示");
+                        shoppingListApp.products = r.data;
+                        shoppingListApp.totalPrice();
+                        shoppingListApp.showShoppingCart();
+                    }
+                }
+            });
+        },
+        //刪除購物車中某商品
+        deleteProduct:function(id){
+            $.ajax({
+                url: '/product/v1/userCart/delete/'+id,
+                method: 'GET',
+                success:function(r){
+                    if(r.code===OK){
+                        //刪除成功後遍歷products
+                        shoppingListApp.products.forEach(function(product,index){
+                            if(id===product.id){
+                                shoppingListApp.products.splice(index,1);
+                            }
+                        })
+                    }
+                    shoppingListApp.totalPrice();
+                }
+            });
+        },
+        //商品數量+1
+        addOneProduct:function(id,count){
+            if(!id){
+                console.log('商品id為空');
+                return;
+            }
+            if(!count){
+                console.log('商品數量為空');
+                return;
+            }
+            count = count+1;
+            $.ajax({
+                url:'/product/v1/userCart/updatecount',
+                method:'GET',
+                data:{
+                    id:id,
+                    count:count
+                },
+                success:function(r){
+                    if(r.code===OK){
+                        console.log('+1成功');
+                        shoppingListApp.totalPrice();
+                        shoppingListApp.loadShoppingList();
+                    }
+                }
+            });
+        },
+        //商品數量-1
+        deleteOneProduct:function(id,count){
+            if(!id){
+                console.log('商品id為空');
+                return;
+            }
+            if(!count || count<=1){
+                console.log('商品數量為空');
+                return;
+            }
+            count = count-1;
+            $.ajax({
+                url:'/product/v1/userCart/updatecount',
+                method:'GET',
+                data:{
+                    id:id,
+                    count:count
+                },
+                success:function(r){
+                    if(r.code===OK){
+                        console.log('-1成功');
+                        shoppingListApp.totalPrice();
+                        shoppingListApp.loadShoppingList();
+                    }
+                }
+            });
+        },
+        //商品輸入框失焦時執行
+        blur:function(id,count){
+            if(!id){
+                return;
+            }
+            if(!count){
+                return;
+            }
+            console.log('productId:'+id);
+            console.log('count:'+count);
+            $.ajax({
+                url:'/product/v1/userCart/updatecount',
+                method:'GET',
+                data:{
+                    id:id,
+                    count:count
+                },
+                success:function(r){
+                    if(r.code===OK){
+                        console.log('商品數量修改成功');
+                        shoppingListApp.totalPrice();
+                        shoppingListApp.loadShoppingList();
+                    }
+                }
+            });
+        },
+        //彈出購物車清單
+        showShoppingCart:function(){
+            //計算總價
+            shoppingListApp.totalPrice();
+            //顯示購物清單
+            $(".shoppinglist").css("display","block");
+        },
+        //計算總價
+        totalPrice:function(){
+            var total = 0;
+            shoppingListApp.products.forEach(function(product,index){
+                var temPrice = product.price == null ? product.oprice : product.price;
+                total += temPrice*product.count;
+            })
+            shoppingListApp.total = total;
+        }
+    }
+});

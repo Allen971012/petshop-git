@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html xmlns:v-on="http://www.w3.org/1999/xhtml">
+<html lang="en" xmlns:th="http://www.thymeleaf.org"></html>
+<head>
+    <meta charset="UTF-8">
+    <title>會員資料更新</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="stylesheet" type="text/css" href="../bootstrap3/css/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="../bootstrap3/font-awesome-4.7.0/css/font-awesome.css"/>
+    <link rel="stylesheet" type="text/css" href="../css/head_footer.css"/>
+    <link rel="stylesheet" type="text/css" href="../css/font_row.css"/>
+    <link rel="stylesheet" type="text/css" href="../css/topshoppinglist.css"/>
+    <script src="../vue/vue.js"></script>
+</head>
+<body>
+<!--頁眉開始-->
+<div class="container">
+    <ul class="nav nav-tabs page_top" th:replace="/index/index :: head_nav">
+        <li role="presentation" ><a href="../index/index_user.html">首頁</a></li>
+        <li role="presentation"><a href="index_dog.html">狗狗商品</a></li>
+        <li role="presentation"><a href="index_cat.html">貓貓商品</a></li>
+        <li class="pull-right active" role="presentation"><a href="update.html">更新會員資料</a></li>
+        <li class="pull-right" role="presentation"><a href="register.html">註冊</a></li>
+        <li class="pull-right " role="presentation"><a href="login.html">登入</a></li>
+    </ul>
+</div>
+<!--頁眉結束-->
+<!--頭部開始-->
+<header>
+    <div class="container">
+        <h1 class="h1_logo">
+            <b>寵物超市</b><img class="img-responsive index_logo" src="../img/logoimg.jpg">
+        </h1>
+        <ul class="ul_header" th:replace="/index/index :: tags_nav">
+            <li><a href="food.html"><b>飼料</b></a></li>
+        </ul>
+        <div  class="header_right" >
+            <a href="shoppingcart.html"><i class="fa fa-shopping-cart"></i> &nbsp&nbsp購物車</a>
+            <div id="userInfoApp" class="dropdown user  hideUserInfo" style="display: none" th:replace="/index/index_user :: userInfo" >
+                <button class="dropdown-toggle" id="dropdownMenu1" aria-haspopup="true" aria-expanded="true" data-toggle="dropdown">
+                    <span><i class="fa fa-user"></i> &nbsp&nbsp會員: <span v-text="username">潘昭廷</span></span>
+                    <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu" aria-labelledby="dropdownMenu1" >
+                    <li><a href="/update.html">更新會員資料</a></li>
+                    <li><a href="../order/order_tracking.html">訂單查詢</a></li>
+                    <li><a href="/logout">登出</a></li>
+                </ul>
+            </div>
+        </div>
+        <!--購物清單開始-->
+        <div class="shoppinglist" style="display: none" th:replace="/product/product_detail :: shoppinglist">
+            <h4>購物車</h4>
+            <ul>
+                <li>
+                    <div class="row">
+                        <div class="col-md-2">
+                            <img class="img-responsive img-rounded" src="../img/dog_food04.jpg">
+                        </div>
+                        <div class="col-md-6">
+                            <p class="row3">希爾思™寵物食品 成犬 低卡 小顆粒</p>
+                            <p>NT$1000</p>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="count">
+                                <span class="span1">-</span>
+                                <input type="text" value="1">
+                                <span class="span2">+</span>
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <a class="delete" href="#"><span class="fa fa-trash"></span></a>
+                        </div>
+                        <div class="col-md-offset-1 col-md-10">
+                            <hr style="background-color: #777777 ; border:none ; height: 1px">
+                        </div>
+                    </div>
+                </li>
+            </ul>
+            <div class="row">
+                <div class="col-md-offset-1 col-md-2"><h4>總計:</h4></div>
+                <div class="col-md-offset-6 col-md-2"><h4>NT$1000</h4></div>
+            </div>
+            <div class="text-center">
+                <button class="btn btn-danger">前往結帳</button>
+            </div>
+
+        </div>
+        <!--購物清單結束-->
+    </div>
+</header>
+<!--頭部結束-->
+<!--主體開始-->
+<section>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-offset-2 col-md-8">
+                <h2 class="text-center"><b>更改會員資料</b></h2>
+                <h5 class="text-center" style="color: red">僅填寫需要修改的資料,不需修改的部分請留白</h5>
+                <div id="updateApp" class="jumbotron">
+                    <div class="text-center" style="color: red;margin-bottom: 6px" v-show="type===1">
+                        <span v-text="message">姓名重複</span>
+                    </div>
+                    <form class="form-horizontal" v-on:submit.prevent="update">
+                        <div class="form-group">
+                            <label for="username" class="col-sm-2 control-label">姓名</label>
+                            <div class="col-sm-10">
+                                <input v-model="username" name="username" type="text" class="form-control" id="username" placeholder="請輸入新姓名">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="password" class="col-sm-2 control-label">密碼</label>
+                            <div class="col-sm-10">
+                                <input v-model="password" name="password" type="password" class="form-control" id="password" placeholder="請輸入新密碼">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="pwd" class="col-sm-2 control-label">密碼確認</label>
+                            <div class="col-sm-10">
+                                <input v-model="confirm" name="confirm" type="password" class="form-control" id="pwd" placeholder="請輸入確認密碼">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="email" class="col-sm-2 control-label">信箱</label>
+                            <div class="col-sm-10">
+                                <input v-model="email" name="email" type="email" class="form-control" id="email" placeholder="請輸入新信箱">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="phone" class="col-sm-2 control-label">手機</label>
+                            <div class="col-sm-10">
+                                <input v-model="phone" name="phone" type="text" class="form-control" id="phone" placeholder="請輸入新手機號碼">
+                            </div>
+                        </div>
+                        <div class="form-group register_button">
+                            <div class="col-sm-offset-2 col-sm-10">
+                                <button type="submit" class="btn btn-default pull-right">更新</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!--主體結束-->
+<!--頁腳開始-->
+<footer class="well">
+    <div class="container">
+        <ul class="footer_ul">
+            <li><b>初次購物</b></li>
+            <li><a href="shoppingnotice.html">購物須知</a></li>
+            <li><a href="returnnotice.html">退貨須知</a></li>
+        </ul>
+        <ul class="footer_ul">
+            <li><b>聯絡我們</b></li>
+            <li class="footer_ul_li">地址:100台北市中正區忠孝西路一段102號10樓</li>
+            <li class="footer_ul_li">電話:080 077 7100</li>
+            <li class="footer_ul_li">信箱:qwer747485@gmail.com</li>
+            <li class="footer_ul_li">服務時間:週一至周五 09:00-21:00</li>
+        </ul>
+    </div>
+</footer>
+<!--頁腳結束-->
+</body>
+<script type="text/javascript" src="../bootstrap3/jquery.min.js"></script>
+<script type="text/javascript" src="../bootstrap3/js/bootstrap.js"></script>
+<script type="text/javascript" src="../bootstrap3/js/holder.js"></script>
+<script type="text/javascript" src="../bootstrap3/js/html5shiv.min.js"></script>
+<script type="text/javascript" src="../bootstrap3/js/css3-mediaqueries.js"></script>
+<script type="text/javascript" src="../bootstrap3/js/respond.min.js"></script>
+<script type="text/javascript" src="../jq/shoppinglist.js"></script>
+<script type="text/javascript" src="../jq/userInfo.js"></script>
+<script type="text/javascript" src="../js/user_info.js"></script>
+<script src="../jq/head.js"></script>
+<script src="../js/utils.js"></script>
+<script src="../js/update.js"></script>
+<script src="../js/tags.js"></script>
+<script type="text/javascript" src="../js/shoppingList.js"></script>
+<script type="text/javascript" src="../jq/global.js"></script>
+</html>

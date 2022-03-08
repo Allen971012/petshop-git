@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html xmlns:v-bind="http://www.w3.org/1999/xhtml" xmlns:v-on="http://www.w3.org/1999/xhtml">
+<html lang="en" xmlns:th="http://www.thymeleaf.org"></html>
+<head>
+  <meta charset="UTF-8">
+  <title>購物車</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <link rel="stylesheet" type="text/css" href="../bootstrap3/css/bootstrap.css">
+  <link rel="stylesheet" type="text/css" href="../bootstrap3/font-awesome-4.7.0/css/font-awesome.css"/>
+  <link rel="stylesheet" type="text/css" href="../css/head_footer.css"/>
+  <link rel="stylesheet" type="text/css" href="../css/font_row.css"/>
+  <link rel="stylesheet" type="text/css" href="../css/product_detail.css"/>
+  <link rel="stylesheet" type="text/css" href="../css/shopping_list.css"/>
+  <link rel="stylesheet" type="text/css" href="../css/foot.css"/>
+  <script src="../vue/vue.js"></script>
+</head>
+<body>
+<!--頁眉開始-->
+<div class="container" >
+  <ul class="nav nav-tabs page_top" th:replace="/index/index :: head_nav">
+    <li role="presentation" ><a href="../index/index.html">首頁</a></li>
+    <li role="presentation"><a href="index_dog.html">狗狗商品</a></li>
+    <li role="presentation"><a href="index_cat.html">貓貓商品</a></li>
+    <li class="pull-right" role="presentation"><a href="register.html">註冊</a></li>
+    <li class="pull-right" role="presentation"><a href="login.html">登入</a></li>
+  </ul>
+</div>
+<!--頁眉結束-->
+<!--頭部開始-->
+<header>
+  <div class="container">
+    <h1 class="h1_logo">
+      <b>寵物超市</b><img class="img-responsive index_logo" src="../img/logoimg.jpg">
+    </h1>
+    <ul class="ul_header" th:replace="/index/index :: tags_nav">
+      <li><a href="../product/product_food.html"><b>飼料</b></a></li>
+      <li><a href="../product/product_snack.html"><b>零食</b></a></li>
+      <li><a href="../product/product_can.html"><b>罐罐</b></a></li>
+      <li><a href="../product/product_toy.html"><b>玩具</b></a></li>
+      <li><a href="../product/product_pretty.html"><b>美容護理</b></a></li>
+      <li><a href="../product/product_outdoor.html"><b>外出用品</b></a></li>
+    </ul>
+    <div class="header_right">
+      <div class="dropdown user" th:replace="/index/index_user :: userInfo">
+        <button class="dropdown-toggle" id="dropdownMenu1" aria-haspopup="true" aria-expanded="true" data-toggle="dropdown">
+          <span><i class="fa fa-user"></i> &nbsp&nbsp會員: 潘昭廷</span>
+          <span class="caret"></span>
+        </button>
+        <ul class="dropdown-menu" aria-labelledby="dropdownMenu1" >
+          <li><a href="#">更新會員資料</a></li>
+          <li><a href="#">訂單查詢</a></li>
+          <li><a href="#">登出</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</header>
+<!--頭部結束-->
+<!--主體開始-->
+<section>
+  <!--搜索框開始-->
+  <div class="container">
+    <div class="row">
+      <div class="col-md-offset-3 col-md-6">
+        <div class="form-inline " th:replace="/index/index_user :: searchApp">
+          <div class="form-group ">
+            <input type="text" class="form-control" style="width: 500px" placeholder="請輸入商品標題">
+          </div>
+          <button type="submit" class="btn btn-default"><span class="fa fa-search"></span></button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!--搜索框結束-->
+  <!--路徑導航條開始-->
+  <ol class="breadcrumb">
+    <li class="first_li">首頁</li>
+    <li>購物車</li>
+    <li>成立訂單</li>
+  </ol>
+  <!--路徑導航條結束-->
+  <!--購物車開始-->
+  <div class="container" id="orderApp">
+    <div>
+      <h2 class="text-center"><b>訂單確認</b></h2>
+    </div>
+    <table class="shopping_table table table-hover" >
+      <tr v-for="(product,index) in products">
+        <td>
+            <img width="150" height="150" class="img-responsive img-rounded" v-bind:src="'..'+product.img">
+        </td>
+        <td>
+          <h4>
+             <a href="#"><p class="row3" v-text="product.title">希爾思™寵物食品 成犬 低卡 小顆粒</p></a>
+          </h4>
+        </td>
+        <td>
+           <span v-bind:style="[(product.price!==null) ? {'text-decoration':'line-through'} : {'text-decoration':'none'}]" >
+                NT$<span class="productprice" v-text="product.oprice">1000</span> &nbsp
+              </span>
+          <span v-show="product.price!==null">NT$<span v-text="product.price">1000</span></span>
+        </td>
+        <td>
+          <div class="count_big">
+            <input readonly="readonly" v-model="product.count" type="text" value="1">
+          </div>
+        </td>
+        <td>
+          小計:<br>NT$<span  v-text="product.onePrice">1000</span>
+        </td>
+      </tr>
+    </table>
+    <hr/>
+    <h4 class="pull-right total">總計:NT$<span v-text="total">1000</span> </h4>
+    <div>
+    <a class="btn btn-danger pull-left" href="/shoppingcart.html">返回購物車</a>
+    </div>
+  </div>
+  <!--購物車結束-->
+  <!--訂單資訊開始-->
+  <div id="insertOrderApp" class="container">
+    <div class="row">
+      <div class="col-md-offset-2 col-md-8">
+        <h2 class="text-center"><b>訂單資料</b></h2>
+        <div class="jumbotron ">
+          <div id="error" class="text-center" style="display: none;color:red">用戶名或密碼錯誤</div>
+          <form v-on:submit.prevent="addOrder" class="form-horizontal" >
+            <div class="form-group">
+              <label for="phone" class="col-sm-2 control-label">手機號碼</label>
+              <div class="col-sm-10">
+                <input v-model="phone" name="phone" type="tel" class="form-control" id="phone" placeholder="請輸入手機號碼">
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="col-sm-2 control-label">收貨地址</label>
+              <div class="col-sm-10">
+                <div class=" city-selector-set row my-style-selector">
+                  <div class="col-md-6">
+                    <!-- 縣市選單 -->
+                    <select v-model="city" class="county"></select>
+                  </div>
+                  <div class="col-md-6">
+                    <!-- 區域選單 -->
+                    <select v-model="district" class="district"></select>
+                  </div>
+                  <div>
+                    <!-- 郵遞區號欄位 (建議加入 readonly 屬性，防止修改) -->
+                    <input style="display: none" id="zipcode" class="zipcode" type="text" size="3" readonly placeholder="郵遞區號">
+                  </div>
+                </div>
+                <input v-model="detail" style="margin-top: 3px" class="form-control" type="text" name="detail" placeholder="請輸入詳細地址(路/街/巷/弄/號/樓)">
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="col-sm-2 control-label">付款方式</label>
+              <div class="col-sm-10">
+                <input style="margin-top: 12px" type="radio" name="payMethod" value="cash" checked>貨到付款
+                <input style="margin-top: 12px" type="radio" name="payMethod" value="cash">PayPal付款
+              </div>
+            </div>
+            <div class="form-group register_button">
+              <div class="col-sm-offset-2 col-sm-10">
+                <button type="submit" class="btn btn-default pull-right">提交訂單</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!--訂單資訊結束-->
+</section>
+<!--主體結束-->
+<!--頁腳開始-->
+<footer class="well" th:replace="/index/index :: foot">
+  <div class="container">
+    <ul class="footer_ul">
+      <li><b>初次購物</b></li>
+      <li><a href="shoppingnotice.html">購物須知</a></li>
+      <li><a href="returnnotice.html">退貨須知</a></li>
+    </ul>
+    <ul class="footer_ul">
+      <li><b>聯絡我們</b></li>
+      <li class="footer_ul_li">地址:100台北市中正區忠孝西路一段102號10樓</li>
+      <li class="footer_ul_li">電話:080 077 7100</li>
+      <li class="footer_ul_li">信箱:qwer747485@gmail.com</li>
+      <li class="footer_ul_li">服務時間:週一至周五 09:00-21:00</li>
+    </ul>
+  </div>
+</footer>
+<!--頁腳結束-->
+</body>
+<script type="text/javascript" src="../bootstrap3/jquery.min.js"></script>
+<script type="text/javascript" src="../bootstrap3/js/bootstrap.js"></script>
+<script type="text/javascript" src="../bootstrap3/js/holder.js"></script>
+<script type="text/javascript" src="../bootstrap3/js/html5shiv.min.js"></script>
+<script type="text/javascript" src="../bootstrap3/js/css3-mediaqueries.js"></script>
+<script type="text/javascript" src="../bootstrap3/js/respond.min.js"></script>
+<script type="text/javascript" src="../jq/shoppinglist.js"></script>
+<script type="text/javascript" src="../jq/head.js"></script>
+<script type="text/javascript" src="../jq/tw-city-selector.min.js"></script>
+<script type="text/javascript" src="../jq/userInfo.js"></script>
+<script type="text/javascript" src="../js/tags.js"></script>
+<script type="text/javascript" src="../js/utils.js"></script>
+<script type="text/javascript" src="../js/user_info.js"></script>
+<script type="text/javascript" src="../js/order.js"></script>
+<script type="text/javascript" src="../js/insertOrder.js"></script>
+<script type="text/javascript" src="../js/searchApp.js"></script>
+<script>
+  new TwCitySelector({
+    el: '.city-selector-set',
+    elCounty: '.county', // 在 el 裡查找 element
+    elDistrict: '.district', // 在 el 裡查找 element
+    elZipcode: '.zipcode', // 在 el 裡查找 element
+  });
+</script>
+<style>
+  .my-style-selector select {
+    width:245px;
+    margin-top: 3px;
+    height:33px;
+    border-radius: 3px;
+    color: #777777;
+    border-color:  #d3d3d3;
+  }
+</style>
+</html>

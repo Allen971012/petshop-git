@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"></html>
+<head>
+    <meta charset="UTF-8">
+    <title>寵物超市</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="stylesheet" type="text/css" href="../bootstrap3/css/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="../bootstrap3/font-awesome-4.7.0/css/font-awesome.css"/>
+    <link rel="stylesheet" type="text/css" href="../css/index.css"/>
+    <link rel="stylesheet" type="text/css" href="../css/font_row.css"/>
+    <link rel="stylesheet" type="text/css" href="../css/head_footer.css"/>
+    <link rel="stylesheet" type="text/css" href="../css/foot.css"/>
+    <link rel="shortcut icon" href="#">
+    <script src="../vue/vue.js"></script>
+</head>
+<body>
+<!--頁眉開始-->
+<div class="container">
+<ul class="nav nav-tabs page_top" th:fragment="head_nav">
+    <li role="presentation" class="active index_nav"><a style="cursor: pointer" onclick="gotoIndex()">首頁</a></li>
+    <li class="dog_nav" role="presentation"><a style="cursor: pointer" onclick="goto(this)">狗狗商品</a></li>
+    <li class="cat_nav" role="presentation"><a style="cursor: pointer" onclick="goto(this)">貓貓商品</a></li>
+    <li class="pull-right hideRL" role="presentation"><a href="/register.html">註冊</a></li>
+    <li class="pull-right hideRL" role="presentation"><a href="/login.html">登入</a></li>
+</ul>
+</div>
+<!--頁眉結束-->
+<!--頭部開始-->
+<header>
+    <div class="container">
+         <h1 class="h1_logo">
+             <b>寵物超市</b><img class="img-responsive index_logo" src="../img/logoimg.jpg">
+         </h1>
+        <ul id="tagsApp" class="ul_header" th:fragment="tags_nav">
+            <li v-for="tag in tags"><a style="cursor: pointer" onclick="go(this)"><b v-text="tag.name">飼料</b></a></li>
+        </ul>
+
+    </div>
+</header>
+<!--頭部結束-->
+<!--主體開始-->
+<section>
+    <div class="container">
+        <div class="row">
+            <!--主體左側開始-->
+            <div class="col-md-9">
+                <!--廣告輪播圖開始-->
+                <div class="ads_img page-header">
+                    <img class="img-responsive img-rounded" src="../img/ads01.jpg">
+                    <img class="img-responsive img-rounded" src="../img/ads02.jpg">
+                    <img class="img-responsive img-rounded" src="../img/ads03.jpg">
+                </div>
+                <!--廣告輪播圖結束-->
+                <!--熱門商品開始-->
+                <div class="page-header">
+                     <h2><b>熱門商品</b></h2>
+                </div>
+                <!--熱門商品縮略圖開始-->
+                <div class="row" th:replace="/index/index_user :: popularProduct">
+                    <div class="col-md-3">
+                        <div class="thumbnail">
+                            <img class="img-responsive img-rounded" src="../img/dog_food04.jpg">
+                            <div class="caption text-center product_h4">
+                                <h4><a class="row2" href="../product/product_detail.html">希爾思™寵物食品 成犬 低卡 小顆粒</a></h4>
+                                <h4 class="price_h4">NT$1000</h4>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="thumbnail">
+                            <img class="img-responsive img-rounded" src="../img/dog_food04.jpg">
+                            <div class="caption text-center product_h4">
+                                <h4><a class="row2" href="../product/product_detail.html">希爾思™寵物食品 成犬 低卡 小顆粒</a></h4>
+                                <h4 class="price_h4">NT$1000</h4>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="thumbnail">
+                            <img class="img-responsive img-rounded" src="../img/dog_food04.jpg">
+                            <div class="caption text-center product_h4">
+                                <h4><a class="row2" href="../product/product_detail.html">希爾思™寵物食品 成犬 低卡 小顆粒</a></h4>
+                                <h4 class="price_h4">NT$1000</h4>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="thumbnail">
+                            <img class="img-responsive img-rounded" src="../img/dog_food04.jpg">
+                            <div class="caption text-center product_h4">
+                                <h4><a class="row2" href="../product/product_detail.html">希爾思™寵物食品 成犬 低卡 小顆粒</a></h4>
+                                <h4 class="price_h4">NT$1000</h4>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="thumbnail">
+                            <img class="img-responsive img-rounded" src="../img/dog_food11.jpg">
+                            <div class="caption text-center product_h4">
+                                <h4><a class="row2" href="../product/product_detail.html">Evolve 伊法 天然無穀犬糧-幼犬配方-去骨雞肉甜薯&藍苺11.25LB (3.75LBx3包)</a></h4>
+                                <h4 class="price_h4">NT$1000</h4>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="thumbnail">
+                            <img class="img-responsive img-rounded" src="../img/dog_food04.jpg">
+                            <div class="caption text-center product_h4">
+                                <h4><a class="row2" href="../product/product_detail.html">希爾思™寵物食品 成犬 低卡 小顆粒</a></h4>
+                                <h4 class="price_h4">NT$1000</h4>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="thumbnail">
+                            <img class="img-responsive img-rounded" src="../img/dog_food11.jpg">
+                            <div class="caption text-center product_h4">
+                                <h4><a class="row2" href="../product/product_detail.html">Evolve 伊法 天然無穀犬糧-幼犬配方-去骨雞肉甜薯&藍苺11.25LB (3.75LBx3包)</a></h4>
+                                <h4 class="price_h4">NT$1000</h4>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="thumbnail">
+                            <img class="img-responsive img-rounded" src="../img/dog_food11.jpg">
+                            <div class="caption text-center product_h4">
+                                <h4><a class="row2" href="../product/product_detail.html">Evolve 伊法 天然無穀犬糧-幼犬配方-去骨雞肉甜薯&藍苺11.25LB (3.75LBx3包)</a></h4>
+                                <h4 class="price_h4">NT$1000</h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--熱門商品縮略圖結束-->
+                <!--熱門商品結束-->
+                <!--特價商品開始-->
+                <div class="page-header">
+                    <h2><b>特價商品</b></h2>
+                </div>
+                <!--特價商品縮略圖開始-->
+                <div class="row" th:replace="/index/index_user :: promotionProduct">
+                    <div class="col-md-3">
+                        <div class="thumbnail">
+                            <img class="img-responsive img-rounded" src="../img/dog_food04.jpg">
+                            <div class="caption text-center product_h4">
+                                <h4><a class="row2" href="../product/product_detail.html">希爾思™寵物食品 成犬 低卡 小顆粒</a></h4>
+                                <h4 class="price_h4"><s>NT$1000</s><span> &nbspNT$700</span></h4>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="thumbnail">
+                            <img class="img-responsive img-rounded" src="../img/dog_food04.jpg">
+                            <div class="caption text-center product_h4">
+                                <h4><a class="row2" href="../product/product_detail.html">希爾思™寵物食品 成犬 低卡 小顆粒</a></h4>
+                                <h4 class="price_h4"><s>NT$1000</s><span> &nbspNT$700</span></h4>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="thumbnail">
+                            <img class="img-responsive img-rounded" src="../img/dog_food04.jpg">
+                            <div class="caption text-center product_h4">
+                                <h4><a class="row2" href="../product/product_detail.html">希爾思™寵物食品 成犬 低卡 小顆粒</a></h4>
+                                <h4 class="price_h4"><s>NT$1000</s><span> &nbspNT$700</span></h4>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="thumbnail">
+                            <img class="img-responsive img-rounded" src="../img/dog_food04.jpg">
+                            <div class="caption text-center product_h4">
+                                <h4><a class="row2" href="../product/product_detail.html">希爾思™寵物食品 成犬 低卡 小顆粒</a></h4>
+                                <h4 class="price_h4"><s>NT$1000</s><span> &nbspNT$700</span></h4>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="thumbnail">
+                            <img class="img-responsive img-rounded" src="../img/dog_food04.jpg">
+                            <div class="caption text-center product_h4">
+                                <h4><a class="row2" href="../product/product_detail.html">希爾思™寵物食品 成犬 低卡 小顆粒</a></h4>
+                                <h4 class="price_h4"><s>NT$1000</s><span> &nbspNT$700</span></h4>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="thumbnail">
+                            <img class="img-responsive img-rounded" src="../img/dog_food04.jpg">
+                            <div class="caption text-center product_h4">
+                                <h4><a class="row2" href="../product/product_detail.html">希爾思™寵物食品 成犬 低卡 小顆粒</a></h4>
+                                <h4 class="price_h4"><s>NT$1000</s><span> &nbspNT$700</span></h4>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="thumbnail">
+                            <img class="img-responsive img-rounded" src="../img/dog_food04.jpg">
+                            <div class="caption text-center product_h4">
+                                <h4><a class="row2" href="../product/product_detail.html">希爾思™寵物食品 成犬 低卡 小顆粒</a></h4>
+                                <h4 class="price_h4"><s>NT$1000</s><span> &nbspNT$700</span></h4>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="thumbnail">
+                            <img class="img-responsive img-rounded" src="../img/dog_food04.jpg">
+                            <div class="caption text-center product_h4">
+                                <h4><a class="row2" href="../product/product_detail.html">希爾思™寵物食品 成犬 低卡 小顆粒</a></h4>
+                                <h4 class="price_h4"><s>NT$1000</s><span> &nbspNT$700</span></h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--特價商品縮略圖結束-->
+                <!--特價商品結束-->
+            </div>
+            <!--主體左側結束-->
+            <!--主體右側開始-->
+            <div class="col-md-3">
+                <div class="ads_right">
+                    <img class="img-responsive img-rounded" src="../img/ads04.jpg">
+                </div>
+                <!--搜索框開始-->
+                <div class="form-inline index_search" th:replace="/index/index_user :: searchApp">
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="請輸入商品標題">
+                    </div>
+                    <button type="submit" class="btn btn-default"><span class="fa fa-search"></span></button>
+                </div>
+                <!--搜索框結束-->
+                <!--熱門商品列表開始-->
+                <ul class="list-group list_right text-center" th:replace="/index/index_user :: rightPopular">
+                    <li class="list-group-item list-group-item-heading ">
+                        <h3>熱門商品</h3>
+                    </li>
+                    <li class="list-group-item"><a href="../product/product_detail.html" class="row1">希爾思™寵物食品 成犬 低卡 小顆粒</a>
+                    </li>
+                    <li class="list-group-item"><a href="../product/product_detail.html" class="row1">希爾思™寵物食品 成犬 低卡 小顆粒</a></li>
+                    <li class="list-group-item"><a href="../product/product_detail.html" class="row1">希爾思™寵物食品 成犬 低卡 小顆粒</a></li>
+                    <li class="list-group-item"><a href="../product/product_detail.html" class="row1">希爾思™寵物食品 成犬 低卡 小顆粒</a></li>
+                    <li class="list-group-item"><a href="../product/product_detail.html" class="row1">希爾思™寵物食品 成犬 低卡 小顆粒</a></li>
+                </ul>
+                <!--熱門商品列表結束-->
+                <!--特價商品開始-->
+                <ul class="list-group list_right text-center" th:replace="/index/index_user :: rightPromotion">
+                    <li class="list-group-item list-group-item-heading ">
+                        <h3>特價商品</h3>
+                    </li>
+                    <li class="list-group-item"><a href="../product/product_detail.html" class="row1">Evolve 伊法 天然無穀犬糧-幼犬配方-去骨雞肉甜薯&藍苺11.25LB (3.75LBx3包)</a>
+                    </li>
+                    <li class="list-group-item"><a href="../product/product_detail.html" class="row1">Evolve 伊法 天然無穀犬糧-幼犬配方-去骨雞肉甜薯&藍苺11.25LB (3.75LBx3包)</a></li>
+                    <li class="list-group-item"><a href="../product/product_detail.html" class="row1">Evolve 伊法 天然無穀犬糧-幼犬配方-去骨雞肉甜薯&藍苺11.25LB (3.75LBx3包)</a></li>
+                    <li class="list-group-item"><a href="../product/product_detail.html" class="row1">Evolve 伊法 天然無穀犬糧-幼犬配方-去骨雞肉甜薯&藍苺11.25LB (3.75LBx3包)</a></li>
+                    <li class="list-group-item"><a href="../product/product_detail.html" class="row1">Evolve 伊法 天然無穀犬糧-幼犬配方-去骨雞肉甜薯&藍苺11.25LB (3.75LBx3包)</a></li>
+                </ul>
+                <!--特價商品列表結束-->
+                <!--友情推薦列表開始-->
+                <ul class="list-group list_right text-center">
+                    <li class="list-group-item list-group-item-heading ">
+                        <h3>友情推薦</h3>
+                    </li>
+                    <li class="list-group-item"><a href="https://shop.maoup.com.tw/?utm_source=google&utm_medium=cpc&utm_campaign=SEM&gclid=Cj0KCQiAweaNBhDEARIsAJ5hwbdxLqd1DIFCRCcZe4Vxv4A8-GUsoxp2k_9a4p9YFCfKQD9jhaFsG1YaApRnEALw_wcB" class="row1">毛起來</a></li>
+                    <li class="list-group-item"><a href="https://petpetgo.com/?ppgclid=59cesf6d0n&gclid=Cj0KCQiAnuGNBhCPARIsACbnLzpts4wkKWh9WSxPGm2azv77WexwtZaT54hkFDXnshvwy0ZYjxAO6QcaAll2EALw_wcB" class="row1">毛孩市集</a></li>
+                    <li class="list-group-item"><a href="https://www.animal.com.tw/" class="row1">動物星球</a></li>
+                    <li class="list-group-item"><a href="https://www.petkingdom.com.tw/" class="row1">寵物王國</a></li>
+                    <li class="list-group-item"><a href="https://www.quickbuy.com.tw/" class="row1">好物快寵</a></li>
+                </ul>
+                <!--友情推薦列表結束-->
+            </div>
+            <!--主體右側結束-->
+        </div>
+    </div>
+</section>
+<!--主體結束-->
+<!--頁腳開始-->
+<footer class="well foot" th:fragment="foot">
+    <div class="container">
+        <ul class="footer_ul">
+            <li><b>初次購物</b></li>
+            <li><a href="shoppingnotice.html">購物須知</a></li>
+            <li><a href="returnnotice.html">退貨須知</a></li>
+        </ul>
+        <ul class="footer_ul">
+            <li><b>聯絡我們</b></li>
+            <li class="footer_ul_li">地址:100台北市中正區忠孝西路一段102號10樓</li>
+            <li class="footer_ul_li">電話:080 077 7100</li>
+            <li class="footer_ul_li">信箱:qwer747485@gmail.com</li>
+            <li class="footer_ul_li">服務時間:週一至周五 09:00-21:00</li>
+        </ul>
+    </div>
+</footer>
+<!--頁腳結束-->
+</body>
+<script type="text/javascript" src="../bootstrap3/jquery.min.js"></script>
+<script type="text/javascript" src="../bootstrap3/js/bootstrap.js"></script>
+<script type="text/javascript" src="../bootstrap3/js/holder.js"></script>
+<script type="text/javascript" src="../bootstrap3/js/html5shiv.min.js"></script>
+<script type="text/javascript" src="../bootstrap3/js/css3-mediaqueries.js"></script>
+<script type="text/javascript" src="../bootstrap3/js/respond.min.js"></script>
+<script type="text/javascript" src="../jq/index.js"></script>
+<script type="text/javascript" src="../jq/head.js"></script>
+<script type="text/javascript" src="../jq/shoppinglist.js"></script>
+<script type="text/javascript" src="../js/tags.js"></script>
+<script type="text/javascript" src="../js/utils.js"></script>
+<script type="text/javascript" src="../js/index.js"></script>
+<script type="text/javascript" src="../js/right.js"></script>
+<script type="text/javascript" src="../js/searchApp.js"></script>
+</html>

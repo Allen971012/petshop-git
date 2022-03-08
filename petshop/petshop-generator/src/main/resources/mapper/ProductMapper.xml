@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="home.petshop.portal.mapper.ProductMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="home.petshop.portal.model.Product">
+        <id column="id" property="id" />
+        <result column="title" property="title" />
+        <result column="price" property="price" />
+        <result column="content" property="content" />
+        <result column="img" property="img" />
+        <result column="createtime" property="createtime" />
+        <result column="tag_names" property="tagNames" />
+        <result column="click_count" property="clickCount" />
+    </resultMap>
+
+</mapper>

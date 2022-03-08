@@ -1,0 +1,27 @@
+body {
+    font-family: "微软雅黑", "黑体", "文泉驿正黑";
+}
+.row5, .row4, .row3, .row2, .row1 {
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+}
+.row5 {
+    -webkit-line-clamp: 5;
+}
+
+.row4 {
+    -webkit-line-clamp: 4;
+}
+
+.row3 {
+    -webkit-line-clamp: 3;
+}
+
+.row2 {
+    -webkit-line-clamp: 2;
+}
+
+.row1 {
+    -webkit-line-clamp: 1;
+}

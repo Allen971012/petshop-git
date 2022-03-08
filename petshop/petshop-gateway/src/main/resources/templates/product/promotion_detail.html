@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html xmlns:v-bind="http://www.w3.org/1999/xhtml">
+<html lang="en" xmlns:th="http://www.thymeleaf.org"></html>
+<head>
+  <meta charset="UTF-8">
+  <title>產品詳情</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <link rel="stylesheet" type="text/css" href="../bootstrap3/css/bootstrap.css">
+  <link rel="stylesheet" type="text/css" href="../bootstrap3/font-awesome-4.7.0/css/font-awesome.css"/>
+  <link rel="stylesheet" type="text/css" href="../css/head_footer.css"/>
+  <link rel="stylesheet" type="text/css" href="../css/font_row.css"/>
+  <link rel="stylesheet" type="text/css" href="../css/product_detail.css"/>
+  <link rel="stylesheet" type="text/css" href="../css/topshoppinglist.css"/>
+  <link rel="stylesheet" type="text/css" href="../css/shoppingcart.css"/>
+  <script src="../vue/vue.js"></script>
+</head>
+<body>
+<!--頁眉開始-->
+<div class="container" >
+  <ul class="nav nav-tabs page_top" th:replace="/index/index :: head_nav">
+    <li role="presentation" ><a href="../index/index.html">首頁</a></li>
+    <li role="presentation"><a href="index_dog.html">狗狗商品</a></li>
+    <li role="presentation"><a href="index_cat.html">貓貓商品</a></li>
+    <li class="pull-right" role="presentation"><a href="update.html">更新會員資料</a></li>
+    <li class="pull-right" role="presentation"><a href="register.html">註冊</a></li>
+    <li class="pull-right" role="presentation"><a href="login.html">登入</a></li>
+  </ul>
+</div>
+<!--頁眉結束-->
+<!--頭部開始-->
+<header>
+  <div class="container" >
+    <h1 class="h1_logo">
+      <b>寵物超市</b><img class="img-responsive index_logo" src="../img/logoimg.jpg">
+    </h1>
+    <ul class="ul_header" th:replace="/index/index :: tags_nav">
+      <li><a href="../product/product_food.html"><b>飼料</b></a></li>
+      <li><a href="../product/product_snack.html"><b>零食</b></a></li>
+      <li><a href="../product/product_can.html"><b>罐罐</b></a></li>
+      <li><a href="../product/product_toy.html"><b>玩具</b></a></li>
+      <li><a href="../product/product_pretty.html"><b>美容護理</b></a></li>
+      <li><a href="../product/product_outdoor.html"><b>外出用品</b></a></li>
+    </ul>
+    <div class="header_right" >
+      <a class="hideUserInfo" style="display: none" href="shoppingcart.html"><i class="fa fa-shopping-cart"></i> &nbsp&nbsp購物車</a>
+      <div id="userInfoApp" class="dropdown user  hideUserInfo" style="display: none" th:fragment="userInfo" >
+        <button class="dropdown-toggle" id="dropdownMenu1" aria-haspopup="true" aria-expanded="true" data-toggle="dropdown">
+          <span><i class="fa fa-user"></i> &nbsp&nbsp會員: <span v-text="username">潘昭廷</span></span>
+          <span class="caret"></span>
+        </button>
+        <ul class="dropdown-menu" aria-labelledby="dropdownMenu1" >
+          <li><a href="/update.html">更新會員資料</a></li>
+          <li><a href="../order/order_tracking.html">訂單查詢</a></li>
+          <li><a href="/logout">登出</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <!--購物清單開始-->
+    <div class="shoppinglist" style="display: none" th:replace="/product/product_detail :: shoppinglist">
+      <h4>購物車</h4>
+      <ul>
+        <li>
+          <div class="row">
+            <div class="col-md-2">
+              <img class="img-responsive img-rounded" src="../img/dog_food04.jpg">
+            </div>
+            <div class="col-md-6">
+              <p class="row3">希爾思™寵物食品 成犬 低卡 小顆粒</p>
+              <p>NT$1000</p>
+            </div>
+            <div class="col-md-2">
+              <div class="count">
+                <span class="span1">-</span>
+                <input type="text" value="1">
+                <span class="span2">+</span>
+              </div>
+            </div>
+            <div class="col-md-2">
+              <a class="delete" href="#"><span class="fa fa-trash"></span></a>
+            </div>
+            <div class="col-md-offset-1 col-md-10">
+              <hr style="background-color: #777777 ; border:none ; height: 1px">
+            </div>
+          </div>
+        </li>
+      </ul>
+      <div class="row">
+        <div class="col-md-offset-1 col-md-2"><h4>總計:</h4></div>
+        <div class="col-md-offset-6 col-md-2"><h4>NT$1000</h4></div>
+      </div>
+      <div class="text-center">
+        <button class="btn btn-danger">前往結帳</button>
+      </div>
+
+    </div>
+    <!--購物清單結束-->
+  </div>
+</header>
+<!--頭部結束-->
+<!--主體開始-->
+<section >
+  <!--搜索框開始-->
+  <div class="container">
+    <div class="row">
+      <div class="col-md-offset-3 col-md-6">
+        <div class="form-inline " th:replace="/product/product_detail :: searchApp">
+          <div class="form-group ">
+            <input type="text" class="form-control" style="width: 500px" placeholder="請輸入商品標題">
+          </div>
+          <button type="submit" class="btn btn-default"><span class="fa fa-search"></span></button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!--搜索框結束-->
+  <div id="promotionDetailApp">
+  <!--路徑導航條開始-->
+  <ol class="breadcrumb">
+    <li class="first_li">首頁</li>
+    <li>特價商品</li>
+    <li v-text="product.title">希爾思™寵物食品 成犬 低卡 小顆粒</li>
+  </ol>
+  <!--路徑導航條結束-->
+  <!--商品內容開始-->
+  <div  class="container product_content">
+    <div class="row">
+      <!--商品內容左側開始-->
+      <div class="col-md-6">
+        <img class="img-responsive img-rounded" v-bind:src="product.img==null?'../img/dog_food04.jpg':'..'+product.img">
+      </div>
+      <!--商品內容左側結束-->
+      <!--商品內容右側開始-->
+      <div class="col-md-6">
+        <h2 v-text="product.title">希爾思™寵物食品 成犬 低卡 小顆粒</h2>
+        <h2 style="color: red">
+          <s>NT$<span v-text="product.oprice">1000</span> &nbsp</s>
+          NT$<span v-text="product.price">1000</span>
+        </h2>
+        <h3>產品特色</h3>
+        <ul v-html="product.content">
+          <li><p>低卡路里與左旋肉酸素有助於維持理想體重</p></li>
+          <li><p>優質蛋白質與天然纖維可幫助在正餐之間維持飽足感</p></li>
+          <li><p>Omega-6 與維生素 E 有助於皮毛亮麗</p></li>
+        </ul>
+        <h3><span>購買數量</span></h3>
+        <div class="count_big">
+          <span class="span3">-</span>
+          <input class="counttext" type="number" oninput="if(value<=0)value=1;if(value.length>2)value=value.slice(0,2);" value="1">
+          <span class="span4">+</span>
+        </div>
+        <div class="join_shoppingcart">
+          <button onclick="insertShoppingCart()" class="btn btn-primary btn-lg btn-block"><span class="fa fa-cart-plus"></span> &nbsp&nbsp加入購物車</button>
+        </div>
+      </div>
+      <!--商品內容右側結束-->
+    </div>
+  </div>
+  </div>
+  <!--商品內容結束-->
+</section>
+<!--主體結束-->
+<!--頁腳開始-->
+<footer class="well">
+  <div class="container">
+    <ul class="footer_ul">
+      <li><b>初次購物</b></li>
+      <li><a href="shoppingnotice.html">購物須知</a></li>
+      <li><a href="returnnotice.html">退貨須知</a></li>
+    </ul>
+    <ul class="footer_ul">
+      <li><b>聯絡我們</b></li>
+      <li class="footer_ul_li">地址:100台北市中正區忠孝西路一段102號10樓</li>
+      <li class="footer_ul_li">電話:080 077 7100</li>
+      <li class="footer_ul_li">信箱:qwer747485@gmail.com</li>
+      <li class="footer_ul_li">服務時間:週一至周五 09:00-21:00</li>
+    </ul>
+  </div>
+</footer>
+<!--頁腳結束-->
+</body>
+<script type="text/javascript" src="../bootstrap3/jquery.min.js"></script>
+<script type="text/javascript" src="../bootstrap3/js/bootstrap.js"></script>
+<script type="text/javascript" src="../bootstrap3/js/holder.js"></script>
+<script type="text/javascript" src="../bootstrap3/js/html5shiv.min.js"></script>
+<script type="text/javascript" src="../bootstrap3/js/css3-mediaqueries.js"></script>
+<script type="text/javascript" src="../bootstrap3/js/respond.min.js"></script>
+<script type="text/javascript" src="../jq/shoppinglist.js"></script>
+<script type="text/javascript" src="../js/promotionDetail.js"></script>
+<script type="text/javascript" src="../js/utils.js"></script>
+<script type="text/javascript" src="../jq/head.js"></script>
+<script type="text/javascript" src="../jq/shoppinglist.js"></script>
+<script type="text/javascript" src="../jq/userInfo.js"></script>
+<script type="text/javascript" src="../js/tags.js"></script>
+<script type="text/javascript" src="../js/user_info.js"></script>
+<script type="text/javascript" src="../js/shoppingList.js"></script>
+<script type="text/javascript" src="../jq/global.js"></script>
+<script type="text/javascript" src="../jq/shoppingcart.js"></script>
+<script type="text/javascript" src="../js/searchApp.js"></script>
+</html>

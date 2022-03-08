@@ -1,0 +1,28 @@
+.shopping_table button{
+    border:0;
+    background-color: white;
+}
+
+.shopping_table a{
+    text-decoration: none;
+    color:black;
+}
+
+.shopping_table{
+    margin-top:50px;
+}
+
+.shopping_table td{
+    vertical-align: middle !important;
+}
+
+.clear_button{
+    margin-left: 20px;
+}
+
+.total{
+    margin-right: 5px;
+}
+
+
+

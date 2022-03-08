@@ -1,0 +1,59 @@
+.ads_img,.ads_img>img{
+    width:850px;
+    height:300px;
+    cursor: pointer;
+}
+.ads_img{
+    position: relative;
+    overflow: hidden;
+}
+
+.ads_img>img{
+    position: absolute;
+}
+
+.price_h4{
+    color:red;
+}
+
+.product_h4 a{
+    color:black;
+    text-decoration: none;
+}
+
+.ads_right>img{
+    float:right;
+    margin-top: 41px;
+    height:300px;
+    cursor: pointer;
+}
+
+.index_search{
+    float:right;
+    margin-top: 47px;
+}
+
+.list_right{
+    float:right;
+    width:226px;
+    margin-top: 31px;
+}
+.list_right a{
+    color:black;
+    text-decoration: none;
+}
+
+.product_h4 a:hover{
+    color: red;
+}
+
+.list_right a:hover{
+    color:red;
+}
+
+
+
+
+
+
+

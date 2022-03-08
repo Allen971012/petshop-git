@@ -1,0 +1,146 @@
+###第一個測試
+GET http://localhost:9200
+
+###分詞測試
+POST http://localhost:9200/_analyze
+Content-Type: application/json
+
+{
+  "text": "Hello World"
+}
+
+###在ES創建索引
+PUT http://localhost:9200/demo_index
+
+###刪除索引
+DELETE  http://localhost:9200/product
+
+###中文分詞測試
+POST http://localhost:9200/_analyze
+Content-Type: application/json
+
+{
+  "analyzer": "ik_smart",
+  "text": "世界如此之大"
+}
+
+###建立questions索引
+PUT http://localhost:9200/petshopdemo
+
+###設置索引文檔屬性和分詞
+POST http://localhost:9200/petshopdemo/_mapping
+Content-Type: application/json
+
+{
+  "properties": {
+    "title": {
+      "type": "text",
+      "analyzer": "ik_smart",
+      "search_analyzer": "ik_smart"
+    },
+    "content": {
+      "type": "text",
+      "analyzer": "ik_smart",
+      "search_analyzer": "ik_smart"
+    }
+  }
+}
+
+###在petshopdemo文檔中存放數據
+POST http://localhost:9200/petshopdemo/_create/1
+Content-Type: application/json
+
+{
+  "id": 1,
+  "title": "java基本數據類型有哪些",
+  "content": "面試問這麼簡單的問題,怎麼回答呢"
+}
+
+###在petshopdemo文檔中存放數據
+POST http://localhost:9200/petshopdemo/_create/2
+Content-Type: application/json
+
+{
+  "id": 2,
+  "title": "int類型的範圍",
+  "content": "為啥要了解int類型範圍"
+}
+
+###在petshopdemo文檔中存放數據
+POST http://localhost:9200/petshopdemo/_create/3
+Content-Type: application/json
+
+{
+  "id": 3,
+  "title": "常用集合有哪些",
+  "content": "企業為什麼這麼愛問集合"
+}
+
+###查詢數據
+GET http://localhost:9200/product/_doc/4
+
+###更新數據
+POST http://localhost:9200/petshopdemo/_doc/3/_update
+Content-Type: application/json
+
+{
+  "doc": {
+    "title": "請問常用的集合有哪些!快回答我"
+  }
+}
+
+###刪除文檔
+DELETE http://localhost:9200/petshopdemo/_doc/3
+
+###單字段全文檢索
+POST http://localhost:9200/product/_search
+Content-Type: application/json
+
+{
+  "query": {
+    "term": {
+        "img": "dog"
+    }
+  }
+}
+
+
+###查看products文檔結構
+GET http://localhost:9200/product/_mapping
+
+###查詢數據
+GET http://localhost:9200/promotions/_doc/3
+
+###單字段全文檢索
+POST http://localhost:9200/product/_search
+Content-Type: application/json
+
+{
+  "query": {
+    "bool": {
+      "must": [
+        {"match": {"img": "dog"}},
+        {"match": {"img": "food"}}
+      ]
+    }
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

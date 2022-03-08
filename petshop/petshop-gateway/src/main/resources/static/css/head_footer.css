@@ -1,0 +1,170 @@
+.index_logo{
+    width:141px;
+    height:100px;
+    display: inline;
+}
+.page_top a{
+    color:black;
+}
+.h1_logo{
+    float:left;
+    margin-top: 0;
+    margin-right: 120px;
+    display: inline;
+}
+
+.ul_header{
+    margin-top: 40px;
+    list-style-type: none;
+}
+
+.ul_header>li{
+    float:left;
+    margin-right: 25px;
+}
+
+.ul_header>li>a{
+    color:black;
+    text-decoration: none;
+}
+
+.header_right{
+    float:right;
+}
+
+.header_right i{
+    margin-left: 50px;
+    font-size: 24px;
+}
+
+.header_right a{
+    color:black;
+    text-decoration: none;
+}
+.footer_ul{
+    float:left;
+    padding-left: 0;
+    margin-right: 200px;
+    list-style-type: none;
+}
+.footer_ul>li>b{
+    font-size: 24px;
+}
+.footer_ul a{
+    color:#777;
+    text-decoration: none;
+}
+
+.footer_ul_li{
+    color:#777;
+}
+
+.shoppinglist{
+    position: absolute;
+    z-index: 9999;
+    top:125px;
+    left:900px;
+    width:500px;
+    height:auto;
+    border:1px solid #e7e8ea;
+    background-color: #f7f7f7;
+}
+
+.shoppinglist>h4{
+    position: relative;
+    left:20px;
+}
+
+.shoppinglist ul{
+    list-style-type: none;
+    padding:10px 0 0 8px;
+}
+
+.shoppinglist img{
+    width:100px;
+    height:50px;
+}
+
+.count{
+    width:66px;
+    height:25px;
+    border-radius: 3px;
+    position: relative;
+}
+
+.count .span1{
+    display: inline-block;
+    position: absolute;
+    font-size: 20px;
+    line-height: 1em;
+    cursor: pointer;
+    width: 24px;
+    height: 100%;
+    text-align: center;
+    color: #d8d8d8;
+    color: #000;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -moz-user-select: none;
+    user-select: none;
+}
+
+.count .span2{
+    display: inline-block;
+    position: absolute;
+    font-size: 16px;
+    line-height: 1em;
+    cursor: pointer;
+    width: 24px;
+    height: 100%;
+    text-align: center;
+    top:3px;
+    left:43px;
+    color: #d8d8d8;
+    color: #000;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -moz-user-select: none;
+    user-select: none;
+}
+
+
+.count input{
+    background: #f7f8fa;
+    display: block;
+    width: 100%;
+    height: 25px;
+    font-size: 7px;
+    line-height: 1em;
+    text-align: center;
+    border: none;
+    outline: 0;
+    font-weight: 500;
+}
+
+.delete{
+    color:black;
+}
+
+.delete>span{
+    position: absolute;
+    top:7px;
+}
+
+.user{
+    display: inline-block;
+}
+.user>button{
+    border:0;
+    padding: 0;
+    margin:0;
+    background-color: white;
+}
+
+.first_li{
+    margin-left:183px;
+}
+
+.breadcrumb{
+    margin-top: 25px;
+}
