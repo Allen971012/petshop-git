@@ -12,7 +12,7 @@
 
 <p>petshop-generator(代碼生成器)-->需要時再使用即可</p>
 
-<p>petshop.sql (資料庫) </p>
+<p>petshop.sql (資料庫結構) </p>
 
 
  
