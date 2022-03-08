@@ -1,7 +1,7 @@
 -- MySQL dump 10.16  Distrib 10.3.7-MariaDB, for Win64 (AMD64)
 --
 -- Host: localhost    Database: petshop
--- ------------------------------------------------------
+-- -----------------------------------------------------
 -- Server version	10.3.7-MariaDB
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
