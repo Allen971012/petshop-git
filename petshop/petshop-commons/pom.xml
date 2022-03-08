@@ -13,6 +13,7 @@
     <version>0.0.1-SNAPSHOT</version>
     <name>petshop-commons</name>
     <description>petshop-commons</description>
+    <!--mybatis-plus-->
     <dependencies>
         <dependency>
             <groupId>com.baomidou</groupId>
