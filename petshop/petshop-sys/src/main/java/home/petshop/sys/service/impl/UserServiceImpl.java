@@ -64,7 +64,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
         if(u!=null){
             throw ServiceException.unprocesableEntity("信箱已經註冊過");
         }
-        //創建User並插入數據
+        //創建User並且插入數據
         User user = new User()
                 .setUsername(registerVo.getUsername())
                 .setPassword("{bcrypt}"+passwordEncoder.encode(registerVo.getPassword()))
