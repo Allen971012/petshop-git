@@ -26,7 +26,6 @@
         <pagehelper.version>5.3.0</pagehelper.version>
     </properties>
     <modules>
-        <module>petshop-portal</module>
         <module>petshop-generator</module>
         <module>petshop-eureka</module>
         <module>petshop-gateway</module>
